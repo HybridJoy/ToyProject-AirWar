@@ -54,21 +54,21 @@ bool Apathy_Hero :: Init(HeroType type)
 
 void Apathy_Hero :: Move()
 {
-	//Ìí¼Ó´¥ÃþÊÂ¼þ
-	//¼àÌý¶Ë¿Ú
+	//æ·»åŠ è§¦æ‘¸äº‹ä»¶
+	//ç›‘å¬ç«¯å£
 	auto listener = EventListenerTouchOneByOne :: create();
-	//·Ö½â´¥ÃþÊÂ¼þ
+	//åˆ†è§£è§¦æ‘¸äº‹ä»¶
 		//began
 	listener->onTouchBegan = [=](Touch * t,Event * E)
 	{
 		log("=====began=====");
-		//ÓÎÏ·ÊÇ·ñÔÝÍ£
+		//æ¸¸æˆæ˜¯å¦æš‚åœ
 		if (Director::getInstance()->isPaused())
 		{
 			return false;
 		}
 		auto currentPos = t->getLocation();
-		this->Vec = this->getPosition() - currentPos;//»ñÈ¡Æ«ÒÆÁ¿
+		this->Vec = this->getPosition() - currentPos;//èŽ·å–åç§»é‡
 		bool iscontain = this->getBoundingBox().containsPoint(currentPos);
 		return iscontain;
 	};	
@@ -76,7 +76,7 @@ void Apathy_Hero :: Move()
 	listener->onTouchMoved = [=](Touch * t,Event * E)
 	{
 		log("=====move=====");
-		//±ß½ç¿ØÖÆ
+		//è¾¹ç•ŒæŽ§åˆ¶
 		auto nextPos = t->getLocation() + this->Vec;
 		float minX = this->getContentSize().width / 2;
 		float maxX = visibleSize.width - minX;
@@ -92,7 +92,7 @@ void Apathy_Hero :: Move()
 		log("=====end=====");
 		this->Vec = Point::ZERO;
 	};
-	//¼àÌý¶Ë¿ÚµÄ·´À¡
+	//ç›‘å¬ç«¯å£çš„åé¦ˆ
 	this->getEventDispatcher()->addEventListenerWithSceneGraphPriority(listener, this);
 }
 
@@ -101,7 +101,7 @@ bool Apathy_Hero :: Hit()
 	this->H_HP--;
 	if(H_HP <= 0)
 	{
-		//´ý½â¾ö£¡£¡£¡
+		//å¾…è§£å†³ï¼ï¼ï¼
 		//this->Hit_Down();
 		return true;
 	}
@@ -135,13 +135,13 @@ void Apathy_Hero :: Hit_Down()
 
 	auto animate = Animate::create(aniHeroDown);
 
-	//CallFuncÊÇ¶¯×÷£¬ÔÊÐíÎÒÃÇµÄ´úÂë×÷Îª¶¯×÷Ö´ÐÐ
-	//SequenceÊÇ¶¯×÷£¬×÷ÓÃÊÇ½«¶à¸ö¶¯×÷°´Ë³ÐòÒÀ´ÎÖ´ÐÐ
+	//CallFuncæ˜¯åŠ¨ä½œï¼Œå…è®¸æˆ‘ä»¬çš„ä»£ç ä½œä¸ºåŠ¨ä½œæ‰§è¡Œ
+	//Sequenceæ˜¯åŠ¨ä½œï¼Œä½œç”¨æ˜¯å°†å¤šä¸ªåŠ¨ä½œæŒ‰é¡ºåºä¾æ¬¡æ‰§è¡Œ
 	
 	auto callFuncN = CallFuncN::create([](Node* node) 
 	{
-		//Node²ÎÊýÊÇÕâ¸ö¶¯×÷µÄÖ´ÐÐÕß
-		//½«×Ô¼º´Ó¸¸ÈÝÆ÷É¾³ý²¢Çå³ý(¶¨Ê±Æ÷£¬¶¯×÷)
+		//Nodeå‚æ•°æ˜¯è¿™ä¸ªåŠ¨ä½œçš„æ‰§è¡Œè€…
+		//å°†è‡ªå·±ä»Žçˆ¶å®¹å™¨åˆ é™¤å¹¶æ¸…é™¤(å®šæ—¶å™¨ï¼ŒåŠ¨ä½œ)
 		node->removeFromParentAndCleanup(true);
 	});
 	

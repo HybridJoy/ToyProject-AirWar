@@ -33,7 +33,7 @@ bool Apathy_GameOverScene ::init(int score)
 	auto Higner_Score = MAX(Highest_Score,score);
 	UserDefault::getInstance()->setIntegerForKey("HIGHSCORE", Higner_Score);
 
-	//Ìí¼ÓÀúÊ·×î¸ß·Ö±êÇ©
+	//æ·»åŠ å†å²æœ€é«˜åˆ†æ ‡ç­¾
 	auto Highest_Score_Lable_Txt = StringUtils::format("%d", Higner_Score);
 	auto Highest_Score_Lable = Label::create(Highest_Score_Lable_Txt,"Buxton Sketch",75);
 	Highest_Score_Lable->setPosition(Point(visibleSize)/2 + Point(0, 200));
@@ -49,7 +49,7 @@ bool Apathy_GameOverScene ::init(int score)
 
 	}
 
-	//Ìí¼Ó×Ü·ÖÊı±êÇ©
+	//æ·»åŠ æ€»åˆ†æ•°æ ‡ç­¾
 	auto Score_Lable_Txt = StringUtils::format("%d", score);
 	auto Score_Label = Label::create(Score_Lable_Txt,"Buxton Sketch",60);
 	Score_Label->setPosition(visibleSize.width / 2, visibleSize.height / 3);
@@ -57,7 +57,7 @@ bool Apathy_GameOverScene ::init(int score)
 	Score_Label->setColor(Color3B::BLACK);
 
 	auto GameRestart_Lable = Sprite::createWithSpriteFrameName("btn_finish.png");
-	//µ±´¥ÃşÖØĞÂ¿ªÊ¼ÓÎÏ·Í¼±êÊ±£¬ÖØĞÂ¿ªÊ¼ÓÎÏ·
+	//å½“è§¦æ‘¸é‡æ–°å¼€å§‹æ¸¸æˆå›¾æ ‡æ—¶ï¼Œé‡æ–°å¼€å§‹æ¸¸æˆ
 	auto menuItemRestart = MenuItemSprite::create(GameRestart_Lable, GameRestart_Lable, [=](Ref *)
 	{
 		Highest_Score_Lable->setVisible(false);
@@ -69,7 +69,7 @@ bool Apathy_GameOverScene ::init(int score)
 		auto aniLoading = Animate::create(AnimationCache::getInstance()->getAnimation("aniLoading"));
 		auto callFunc = CallFunc::create([=]()
 		{
-			//Ìø×ª³¡¾°µÄ´úÂë
+			//è·³è½¬åœºæ™¯çš„ä»£ç 
 			auto scene = ApathyVV :: CreateScene();
 			Director::getInstance()->replaceScene(scene);
 		});
@@ -80,7 +80,7 @@ bool Apathy_GameOverScene ::init(int score)
 	menuItemRestart->setPosition(visibleSize.width - GameRestart_Lable->getContentSize().width / 2 - 20, GameRestart_Lable->getContentSize().height / 2 + 20);
 	auto menu = Menu::create();
 	menu->addChild(menuItemRestart,Menu_Layer,menuItemRestart_Tag);
-	//Ä¬ÈÏ²Ëµ¥µÄ×ø±êÖĞÖĞÑë£¬ÕâÀï²»·½±ã¶¨Î»£¬ËùÒÔÖÃÁã£¬ÈÃ²Ëµ¥Ïî×Ô¼º¶¨Î»
+	//é»˜è®¤èœå•çš„åæ ‡ä¸­ä¸­å¤®ï¼Œè¿™é‡Œä¸æ–¹ä¾¿å®šä½ï¼Œæ‰€ä»¥ç½®é›¶ï¼Œè®©èœå•é¡¹è‡ªå·±å®šä½
 	menu->setPosition(Point::ZERO);
 	this->addChild(menu,Button_Layer,Game_Over_Menu_Tag);
 	return true;

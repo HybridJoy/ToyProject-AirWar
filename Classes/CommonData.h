@@ -9,12 +9,12 @@
 USING_NS_CC;
 using namespace CocosDenshion;
 
-//ÆÁÄ»³ß´ç
+//å±å¹•å°ºå¯¸
 #define visibleSize Director::getInstance()->getVisibleSize()
-//ÒôĞ§È«¾Ö
+//éŸ³æ•ˆå…¨å±€
 #define Audio SimpleAudioEngine::getInstance()
 
-//===========²ã±êÖ¾===========//
+//===========å±‚æ ‡å¿—===========//
 
 #define BackGround_Layer   0
 #define Label_Layer        1
@@ -24,36 +24,36 @@ using namespace CocosDenshion;
 #define Item_Layer         2
 #define UI_Layer           3
 
-//===========±êÇ©==========//
+//===========æ ‡ç­¾==========//
 
-//±³¾°Í¼Æ¬
+//èƒŒæ™¯å›¾ç‰‡
 #define  Welcome_Bg1_Tag	  10
 #define  Welcome_Bg2_Tag	  11
 #define  BackGround1_Tag	  1
 #define  BackGround2_Tag	  2
 #define  Game_Over_Bg_Tag	  9
 #define  Game_Restart_Bg_Tag  16
-//Ó¢ĞÛ
+//è‹±é›„
 #define Hero_Tag 3
 
-//·ÖÊı
+//åˆ†æ•°
 #define Score_Label_Tag 4
 #define Highest_Score_Lable_Tag 14
 
-//ÑªÁ¿
+//è¡€é‡
 #define HP_Label_Tag 5
 
-//Õ¨µ¯°´Å¥
+//ç‚¸å¼¹æŒ‰é’®
 #define MenuItemBomb_Tag 6
 
-//Õ¨µ¯ÊıÁ¿
+//ç‚¸å¼¹æ•°é‡
 #define Bomb_Count_Tag 7
 
-//²Ëµ¥
+//èœå•
 #define Menu_Tag 8
 #define Game_Over_Menu_Tag 13
 
-//ÖØĞÂ¿ªÊ¼°´Å¥
+//é‡æ–°å¼€å§‹æŒ‰é’®
 #define  menuItemRestart_Tag 12 
 #define  Restart_Game_Label_Tag 15
 

@@ -77,8 +77,8 @@ void Apathy_Items :: Item_animation()
 			break;
 		case UFO1:
 		case UFO2:
-			auto move1 = MoveBy::create(0.5f, Point(0, -300));	//µÚÒ»´Î½øÈëÆÁÄ»
-			auto move2 = MoveTo::create(1, Point(this->getPositionX(), -this->getContentSize().height / 2));	//µÚ¶þ´ÎÒÆ³öÆÁÄ»ÏÂ±ß½ç
+			auto move1 = MoveBy::create(0.5f, Point(0, -300));	//ç¬¬ä¸€æ¬¡è¿›å…¥å±å¹•
+			auto move2 = MoveTo::create(1, Point(this->getPositionX(), -this->getContentSize().height / 2));	//ç¬¬äºŒæ¬¡ç§»å‡ºå±å¹•ä¸‹è¾¹ç•Œ
 			auto sequence = Sequence::create(move1, move1->reverse(), move2, RemoveSelf::create(), nullptr);
 			this->runAction(sequence);
 			break;

@@ -19,14 +19,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setOpenGLView(glview);
     }
 
-	//ÉèÖÃÄ¿Â¼
+	//è®¾ç½®ç›®å½•
 	FileUtils::getInstance()->addSearchPath("ui");
 	FileUtils::getInstance()->addSearchPath("font");
 	FileUtils::getInstance()->addSearchPath("sound");
 
-	//ÉèÖÃ´°¿Ú´óÐ¡
+	//è®¾ç½®çª—å£å¤§å°
 	glview->setFrameSize(480,640);
-	//ÊÊÓ¦ÆÁÄ»
+	//é€‚åº”å±å¹•
 	glview->setDesignResolutionSize(480, 640, ResolutionPolicy::FIXED_WIDTH);
 
     // turn on display FPS

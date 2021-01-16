@@ -25,25 +25,25 @@ bool ApathyVV::init()
         return false;
     }
     
-	//³õÊ¼»¯³ÉÔ±±äÁ¿
+	//åˆå§‹åŒ–æˆå‘˜å˜é‡
 	this->Total_Score = 0;
 	this->M_DobuleBullet = 0;
 	this->M_Bombs = 0;
 	this->Hero_Inition_HP = 0;
 
-	//µ¼Èëplist
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("shoot_background.plist");//±³¾°Í¼Æ¬
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("shoot.plist");//·É»ú
+	//å¯¼å…¥plist
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("shoot_background.plist");//èƒŒæ™¯å›¾ç‰‡
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("shoot.plist");//é£æœº
 	
-	//´´ÔìÓ¢ĞÛ
+	//åˆ›é€ è‹±é›„
 	this->CreateHero(HERO1);
 
-	//µ¼Èë±³¾°ºÍ·ÖÊı¡¢ÑªÁ¿±êÇ©
+	//å¯¼å…¥èƒŒæ™¯å’Œåˆ†æ•°ã€è¡€é‡æ ‡ç­¾
 	this->SetBackground();
 
 	
 
-	//¹Ì¶¨ÆµÂÊ²úÉú×Óµ¯¡¢µÀ¾ßºÍµĞ»ú
+	//å›ºå®šé¢‘ç‡äº§ç”Ÿå­å¼¹ã€é“å…·å’Œæ•Œæœº
 	this->schedule(schedule_selector(ApathyVV::CreateBullet), 0.5f);
 	this->schedule(schedule_selector(ApathyVV::CreateProp), 10.0f);
 
@@ -51,18 +51,18 @@ bool ApathyVV::init()
 	this->schedule(schedule_selector(ApathyVV::CreateMiddleEnemy), 4.0f);
 	this->schedule(schedule_selector(ApathyVV::CreateBigEnemy), 10.0f);
 
-	//±£Ö¤Ã¿Ò»Ö¡Í¼Æ¬µ÷ÓÃupdate
+	//ä¿è¯æ¯ä¸€å¸§å›¾ç‰‡è°ƒç”¨update
 	this->scheduleUpdate();
     return true;
 }
 
 void ApathyVV::update(float dt)
 {
-	//ÕÒµ½±³¾°Í¼Æ¬
+	//æ‰¾åˆ°èƒŒæ™¯å›¾ç‰‡
 	auto bg1 = this->getChildByTag(BackGround1_Tag);
 	auto bg2 = this->getChildByTag(BackGround2_Tag);
 
-	//ÉèÖÃÍ¼Æ¬ÒÆ¶¯
+	//è®¾ç½®å›¾ç‰‡ç§»åŠ¨
 	bg1->setPosition(bg1->getPosition().x,bg1->getPosition().y - 2);
 	bg2->setPositionY(bg1->getPositionY() + bg1->getContentSize().height);
 	if(bg2->getPositionY() < 0)
@@ -70,8 +70,8 @@ void ApathyVV::update(float dt)
 		bg1->setPosition(0,0);
 	}
 
-	//ÉèÖÃÓ¢ĞÛ×Óµ¯ÒÆ¶¯
-	Vector<Apathy_Items *> V_RemoveBullets;//Òç³öÆÁÄ»ÍâµÄ×Óµ¯¼¯ºÏ
+	//è®¾ç½®è‹±é›„å­å¼¹ç§»åŠ¨
+	Vector<Apathy_Items *> V_RemoveBullets;//æº¢å‡ºå±å¹•å¤–çš„å­å¼¹é›†åˆ
 	for(auto bullet : this->M_Bullets)
 	{
 		bullet->setPositionY(bullet->getPositionY() + 3);
@@ -81,8 +81,8 @@ void ApathyVV::update(float dt)
 		}
 	}
 
-	//ÉèÖÃµĞ»úÒÆ¶¯
-	Vector<Apathy_Enemy *> V_RemoveE;//Òç³öÆÁÄ»ºÍ±»»÷»ÙµÄµĞ»ú¼¯ºÏ
+	//è®¾ç½®æ•Œæœºç§»åŠ¨
+	Vector<Apathy_Enemy *> V_RemoveE;//æº¢å‡ºå±å¹•å’Œè¢«å‡»æ¯çš„æ•Œæœºé›†åˆ
 
 	for(auto currEnemy : this->M_Enemies)
 	{
@@ -90,12 +90,12 @@ void ApathyVV::update(float dt)
 		if(currEnemy->getPositionY() < 0 - currEnemy->getContentSize().height / 2)
 		{
 			V_RemoveE.pushBack(currEnemy);
-			this->removeChild(currEnemy);//´ÓÆÁÄ»ÉÏÒÆ³ı
+			this->removeChild(currEnemy);//ä»å±å¹•ä¸Šç§»é™¤
 		}	
 	}
 
-	//ÉèÖÃµĞ»ú×Óµ¯ÒÆ¶¯
-	Vector<Apathy_Items *> V_RemoveEnemyBullets;//Òç³öÆÁÄ»ÍâµÄ×Óµ¯¼¯ºÏ
+	//è®¾ç½®æ•Œæœºå­å¼¹ç§»åŠ¨
+	Vector<Apathy_Items *> V_RemoveEnemyBullets;//æº¢å‡ºå±å¹•å¤–çš„å­å¼¹é›†åˆ
 	for(auto EnemyBullet : this->M_EnemyBullets)
 	{
 		EnemyBullet->setPositionY(EnemyBullet->getPositionY() - EnemyBullet->GetSpeed());
@@ -105,8 +105,8 @@ void ApathyVV::update(float dt)
 		}
 	}
 
-	//Åö×²¼ì²â
-		//µĞ»úÓëÓ¢ĞÛ
+	//ç¢°æ’æ£€æµ‹
+		//æ•Œæœºä¸è‹±é›„
 	for(auto Hero : this->M_Heroes)
 	{
 		for(auto currEnemy : this->M_Enemies)
@@ -119,7 +119,7 @@ void ApathyVV::update(float dt)
 			}
 		}
 	}
-		//µĞ»ú×Óµ¯ÓëÓ¢ĞÛ
+		//æ•Œæœºå­å¼¹ä¸è‹±é›„
 	for(auto Hero : this->M_Heroes)
 	{
 		for(auto EnemyBullet : this->M_EnemyBullets)
@@ -132,14 +132,14 @@ void ApathyVV::update(float dt)
 				{
 					this->GameOver(Hero);
 				}
-				//¸üĞÂÑªÁ¿
+				//æ›´æ–°è¡€é‡
 				auto HP_Label = (Label *)this->getChildByTag(HP_Label_Tag);
 				auto strHP = StringUtils::format("HP: %d", MAX(Hero->GetHP(),0));
 				HP_Label ->setString(strHP);
 			}
 		}
 	}
-		//Ó¢ĞÛ×Óµ¯ÓëµĞ»ú
+		//è‹±é›„å­å¼¹ä¸æ•Œæœº
 	for(auto currEnemy : this->M_Enemies)
 		for(auto bullet : this->M_Bullets)
 		{
@@ -150,7 +150,7 @@ void ApathyVV::update(float dt)
 				this->DisplayDamage(currEnemy);
 				if(currEnemy->Hit())
 				{
-					//¸üĞÂ·ÖÊı
+					//æ›´æ–°åˆ†æ•°
 					auto Score_Label = (Label *)this->getChildByTag(Score_Label_Tag);
 					this->Total_Score += currEnemy->GetScore();
 					auto strScore = StringUtils::format("Total_Score: %d", Total_Score);
@@ -161,7 +161,7 @@ void ApathyVV::update(float dt)
 				
 			}
 		}
-		//Ó¢ĞÛÓëµÀ¾ß
+		//è‹±é›„ä¸é“å…·
 	Vector<Apathy_Items *> V_RemoveProps;
 	for(auto Hero : this->M_Heroes)
 	{
@@ -182,7 +182,7 @@ void ApathyVV::update(float dt)
 						{
 							Audio->playEffect("get_bomb.mp3");
 							this->M_Bombs++;
-							//¸üĞÂÕ¨µ¯ÊıÁ¿
+							//æ›´æ–°ç‚¸å¼¹æ•°é‡
 							auto Bomb_Label = (Label *)this->getChildByTag(Bomb_Count_Tag);
 							auto strBomb = StringUtils::format("X%d", this->M_Bombs);
 							Bomb_Label ->setString(strBomb);
@@ -196,7 +196,7 @@ void ApathyVV::update(float dt)
 		}
 	}
 
-	//Çå³ıÒç³öÆÁÄ»ÍâµÄ×Óµ¯
+	//æ¸…é™¤æº¢å‡ºå±å¹•å¤–çš„å­å¼¹
 	for(auto bullet : V_RemoveBullets)
 	{
 		this->M_Bullets.eraseObject(bullet);
@@ -204,7 +204,7 @@ void ApathyVV::update(float dt)
 	}
 	V_RemoveBullets.clear();
 
-	//µĞ»ú×Óµ¯
+	//æ•Œæœºå­å¼¹
 	for(auto EnemyBullet : V_RemoveEnemyBullets)
 	{
 		this->M_EnemyBullets.eraseObject(EnemyBullet);
@@ -212,7 +212,7 @@ void ApathyVV::update(float dt)
 	}
 	V_RemoveEnemyBullets.clear();
 
-	//´¦ÀíÒç³öÆÁÄ»ÍâµÄµÀ¾ß
+	//å¤„ç†æº¢å‡ºå±å¹•å¤–çš„é“å…·
 	for(auto Prop : M_Props)
 	{
 		if(Prop->getPositionY() <= 0 - Prop->getContentSize().height / 2)
@@ -227,7 +227,7 @@ void ApathyVV::update(float dt)
 	} 
 	V_RemoveProps.clear();
 
-	//Çå³ıÒç³öÆÁÄ»ºÍ±»»÷»ÙµÄµĞ»ú
+	//æ¸…é™¤æº¢å‡ºå±å¹•å’Œè¢«å‡»æ¯çš„æ•Œæœº
 	for(auto Enemy : V_RemoveE)
 	{
 		this->M_Enemies.eraseObject(Enemy);
@@ -255,7 +255,7 @@ void ApathyVV::UpdateBomb()
 	{
 		item->setVisible(true);
 		Bomb__Count_Lable->setVisible(true);
-		//¸üĞÂÕ¨µ¯Êı
+		//æ›´æ–°ç‚¸å¼¹æ•°
 		Bomb__Count_Lable->setString(StringUtils::format("X%d", this->M_Bombs));
 	}
 }
@@ -264,7 +264,7 @@ void ApathyVV::PauseAndResume(Ref * ref)
 {
 	Audio->playEffect("button.mp3");
 	auto toggle = (MenuItemToggle *) ref;
-	//Í¨¹ıToggle²Ëµ¥ÏîµÄSelectedIndex¿ÉÒÔÅĞ¶ÏÏÖÔÚÇĞ»»µ½µÚ¼¸Ïî£¬ËûµÄÖµ´Ó0¿ªÊ¼
+	//é€šè¿‡Toggleèœå•é¡¹çš„SelectedIndexå¯ä»¥åˆ¤æ–­ç°åœ¨åˆ‡æ¢åˆ°ç¬¬å‡ é¡¹ï¼Œä»–çš„å€¼ä»0å¼€å§‹
 	if (toggle->getSelectedIndex() == 0) 
 	{
 		Director::getInstance()->resume();
@@ -278,7 +278,7 @@ void ApathyVV::PauseAndResume(Ref * ref)
 
 void ApathyVV::GameOver(Apathy_Hero * Hero)
 {
-	//ÇĞ»»ÒôÀÖ
+	//åˆ‡æ¢éŸ³ä¹
 	Audio->stopBackgroundMusic(true);
 	Audio->stopAllEffects();
 	Audio->playEffect("game_over.mp3");
@@ -294,23 +294,23 @@ void ApathyVV::GameOver(Apathy_Hero * Hero)
 
 void ApathyVV::SetBackground()
 {
-	//µ¼Èë±³¾°ÒôÀÖ
+	//å¯¼å…¥èƒŒæ™¯éŸ³ä¹
 	Audio->setBackgroundMusicVolume(0.5f);
 	Audio->playBackgroundMusic("game_music.mp3", true);
 
-	//´´½¨¾«Áé
-	auto bg1 = Sprite::createWithSpriteFrameName("background.png");//±³¾°Í¼Æ¬1
-	auto bg2 = Sprite::createWithSpriteFrameName("background.png");//±³¾°Í¼Æ¬2
+	//åˆ›å»ºç²¾çµ
+	auto bg1 = Sprite::createWithSpriteFrameName("background.png");//èƒŒæ™¯å›¾ç‰‡1
+	auto bg2 = Sprite::createWithSpriteFrameName("background.png");//èƒŒæ™¯å›¾ç‰‡2
 
-	//ÉèÖÃÃªµã
+	//è®¾ç½®é”šç‚¹
 	bg1->setAnchorPoint(Point::ZERO);
 	bg2->setAnchorPoint(Point::ZERO);
 
-	//Á½ÕÅ±³¾°Í¼Æ¬Î»ÖÃ
+	//ä¸¤å¼ èƒŒæ™¯å›¾ç‰‡ä½ç½®
 	bg1->setPosition(0,0);
 	bg2->setPositionY(bg1->getContentSize().height);
 
-	//¿¹¾â³İ
+	//æŠ—é”¯é½¿
 	bg1->getTexture()->setAliasTexParameters();
 	bg2->getTexture()->setAliasTexParameters();
 
@@ -319,17 +319,17 @@ void ApathyVV::SetBackground()
 	this->addChild(bg1, BackGround_Layer, BackGround1_Tag);
 	this->addChild(bg2, BackGround_Layer, BackGround2_Tag);
 
-	//Ìí¼Ó·ÖÊı±êÇ©
+	//æ·»åŠ åˆ†æ•°æ ‡ç­¾
 	auto Lable_Txt = StringUtils::format("Total_Score: %d", 0);
 	auto Score_Label = Label::create(Lable_Txt,"Buxton Sketch",45);
 	//auto Score_Label = Label::createWithBMFont("font.fnt",Lable_Txt);
 	Score_Label->setAnchorPoint(Point::ANCHOR_TOP_LEFT);
 	Score_Label->setPosition(20, visibleSize.height-25);
 	this->addChild(Score_Label,Label_Layer,Score_Label_Tag);
-	//¸Ä±ä×ÖÌåÑÕÉ«
+	//æ”¹å˜å­—ä½“é¢œè‰²
 	Score_Label->setColor(Color3B::BLACK);
 
-	//Ìí¼ÓÑªÁ¿±êÇ©
+	//æ·»åŠ è¡€é‡æ ‡ç­¾
 	if(!(this->getChildByTag(Hero_Tag) == nullptr))
 	{
 		auto Lable_Txt1 = StringUtils::format("HP: %d",MAX(this->Hero_Inition_HP,0));
@@ -338,33 +338,33 @@ void ApathyVV::SetBackground()
 		HP_Label->setAnchorPoint(Point(1,0));
 		HP_Label->setPosition(visibleSize.width-40,20);
 		this->addChild(HP_Label,Label_Layer, HP_Label_Tag);
-		//¸Ä±ä×ÖÌåÑÕÉ«
+		//æ”¹å˜å­—ä½“é¢œè‰²
 		HP_Label->setColor(Color3B::RED);
 	}
 			
-	//Ìí¼ÓÕ¨µ¯±êÇ©ºÍ²Ëµ¥
-		//²Ëµ¥
+	//æ·»åŠ ç‚¸å¼¹æ ‡ç­¾å’Œèœå•
+		//èœå•
 	auto Bomb_Lable = Sprite::createWithSpriteFrameName("bomb.png");
-	//µ±´¥ÃşÕ¨µ¯Í¼±êÊ±£¬´¥·¢È«ÆÁ·É»úµÄ±¬Õ¨²¢¼Ç·Ö
+	//å½“è§¦æ‘¸ç‚¸å¼¹å›¾æ ‡æ—¶ï¼Œè§¦å‘å…¨å±é£æœºçš„çˆ†ç‚¸å¹¶è®°åˆ†
 	auto menuItemBomb = MenuItemSprite::create(Bomb_Lable, Bomb_Lable, [=](Ref *)
 	{
 		Audio->playEffect("use_bomb.mp3");
 		this->M_Bombs--;
 		this->UpdateBomb();
-		//Çå¿ÕµĞ»ú¼¯ºÏ
+		//æ¸…ç©ºæ•Œæœºé›†åˆ
 		for(auto Enemy : M_Enemies)
 		{
 			Enemy->Hit_Down();
 			this->Total_Score = this->Total_Score + Enemy->GetScore();
 		}
 		this->M_Enemies.clear();
-		//Çå¿ÕµĞ»ú×Óµ¯¼¯ºÏ
+		//æ¸…ç©ºæ•Œæœºå­å¼¹é›†åˆ
 		for(auto EnemyBullet : M_EnemyBullets)
 		{
 			this->removeChild(EnemyBullet);
 		}
 		this->M_EnemyBullets.clear();
-		//¸üĞÂ·ÖÊı±êÇ©
+		//æ›´æ–°åˆ†æ•°æ ‡ç­¾
 		auto strScore = StringUtils::format("Total_Score: %d", Total_Score);
 		Score_Label ->setString(strScore);
 	});
@@ -372,25 +372,25 @@ void ApathyVV::SetBackground()
 	menuItemBomb->setPosition(40,40);
 	auto menu = Menu::create();
 	menu->addChild(menuItemBomb,UI_Layer,MenuItemBomb_Tag);
-	//Ä¬ÈÏ²Ëµ¥µÄ×ø±êÖĞÖĞÑë£¬ÕâÀï²»·½±ã¶¨Î»£¬ËùÒÔÖÃÁã£¬ÈÃ²Ëµ¥Ïî×Ô¼º¶¨Î»
+	//é»˜è®¤èœå•çš„åæ ‡ä¸­ä¸­å¤®ï¼Œè¿™é‡Œä¸æ–¹ä¾¿å®šä½ï¼Œæ‰€ä»¥ç½®é›¶ï¼Œè®©èœå•é¡¹è‡ªå·±å®šä½
 	menu->setPosition(Point::ZERO);
 	this->addChild(menu,Menu_Layer,Menu_Tag);
-		//±êÇ©
+		//æ ‡ç­¾
 	auto Bomb_Count = Label::createWithBMFont("font.fnt", "X0");
 	Bomb_Count->setPosition(menuItemBomb->getContentSize().width+45, 40);
 	Bomb_Count->setAnchorPoint(Point::ANCHOR_MIDDLE_LEFT);
 	Bomb_Count->setColor(Color3B::BLACK);
 	this->addChild(Bomb_Count,Label_Layer,Bomb_Count_Tag);
-	//ÉèÖÃÎª²»¿É¼û
+	//è®¾ç½®ä¸ºä¸å¯è§
 	menuItemBomb->setVisible(false);
 	Bomb_Count->setVisible(false);
 
-	//ÔİÍ£±êÇ©
+	//æš‚åœæ ‡ç­¾
 	auto Pause_Normal_Label = Sprite::createWithSpriteFrameName("game_pause_nor.png");
 	auto Pause_Pressed_Label = Sprite::createWithSpriteFrameName("game_pause_pressed.png");
 	auto menuItemPause = MenuItemSprite::create(Pause_Normal_Label, Pause_Pressed_Label);
 
-	//¼ÌĞø
+	//ç»§ç»­
 	auto Resume_Normal_Label = Sprite::createWithSpriteFrameName("game_resume_nor.png");
 	auto Resume_Pressed_Label = Sprite::createWithSpriteFrameName("game_resume_pressed.png");
 	auto menuItemResume = MenuItemSprite::create(Resume_Normal_Label, Resume_Pressed_Label);
@@ -399,7 +399,7 @@ void ApathyVV::SetBackground()
 	menuItemToggle->setPosition(visibleSize.width - menuItemPause->getContentSize().width,visibleSize.height - menuItemPause->getContentSize().height);
 
 	menu->addChild(menuItemToggle,UI_Layer);
-	//menu->setPosition(Point(;	//²Ëµ¥Ä¬ÈÏ¶¨Î»ÔÚÆÁÄ»ÖĞÑë£¬ÕâÀï¶¨Î»ÔÚ×óÏÂ½Ç£¬·½±ã²Ëµ¥Ïî¶¨Î»
+	//menu->setPosition(Point(;	//èœå•é»˜è®¤å®šä½åœ¨å±å¹•ä¸­å¤®ï¼Œè¿™é‡Œå®šä½åœ¨å·¦ä¸‹è§’ï¼Œæ–¹ä¾¿èœå•é¡¹å®šä½
 }
 
 void ApathyVV::CreateProp(float dt)
@@ -426,11 +426,11 @@ void ApathyVV::CreateProp(float dt)
 
 void ApathyVV::CreateBullet(float dt)
 {
-	//»ñµÃÓ¢ĞÛ
+	//è·å¾—è‹±é›„
 	auto Air = this->getChildByTag(Hero_Tag);
-	//²¥·ÅÒôĞ§
+	//æ’­æ”¾éŸ³æ•ˆ
 	Audio->playEffect("bullet.mp3");
-	//Ë«×Óµ¯
+	//åŒå­å¼¹
 	if(this->M_DobuleBullet > 0)
 	{
 		auto bullet1 = Apathy_Items :: Create(BULLET2);
@@ -443,7 +443,7 @@ void ApathyVV::CreateBullet(float dt)
 		this->M_Bullets.pushBack(bullet2);
 		this->M_DobuleBullet--;
 	}
-	//µ¥×Óµ¯
+	//å•å­å¼¹
 	else
 	{
 		auto bullet = Apathy_Items :: Create(BULLET1);
@@ -451,7 +451,7 @@ void ApathyVV::CreateBullet(float dt)
 		this->addChild(bullet,Item_Layer);
 		this->M_Bullets.pushBack(bullet);
 	}
-	//µĞ»ú×Óµ¯
+	//æ•Œæœºå­å¼¹
 	for(auto currEnemy : M_Enemies)
 	{
 		this->CreateEnemyBullet(currEnemy);
@@ -479,7 +479,7 @@ void ApathyVV::CreateHero(HeroType)
 
 void ApathyVV::CreateEnemy(EnemyType type)
 {
-	//´´½¨µĞ»ú
+	//åˆ›å»ºæ•Œæœº
 	auto currEnemy = Apathy_Enemy :: Create(type);
 	float minX = currEnemy->getContentSize().width / 2;
 	float maxX = visibleSize.width - minX;

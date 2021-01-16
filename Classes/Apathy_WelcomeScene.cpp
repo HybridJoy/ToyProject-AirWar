@@ -24,14 +24,14 @@ bool Apathy_WelcomeScene :: init()
 		return false;
 	}
 
-	//µ±Ç°Ê±¼ä×÷ÎªËæ»úÊıÖÖ×Ó
+	//å½“å‰æ—¶é—´ä½œä¸ºéšæœºæ•°ç§å­
 	//srand((unsigned int)time(0));
 
-	//µ¼Èëplist
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("shoot_background.plist");//±³¾°Í¼Æ¬
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("shoot.plist");//·É»ú
+	//å¯¼å…¥plist
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("shoot_background.plist");//èƒŒæ™¯å›¾ç‰‡
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("shoot.plist");//é£æœº
 
-	//==========Ô¤¼ÓÔØÒôÀÖÒôĞ§===========//
+	//==========é¢„åŠ è½½éŸ³ä¹éŸ³æ•ˆ===========//
 
 	SimpleAudioEngine::getInstance()->preloadBackgroundMusic("game_music.mp3");
 
@@ -48,22 +48,22 @@ bool Apathy_WelcomeScene :: init()
 	SimpleAudioEngine::getInstance()->preloadEffect("out_porp.mp3");
 	SimpleAudioEngine::getInstance()->preloadEffect("use_bomb.mp3");
 
-	//==========×é×°¶¯»­===========//
+	//==========ç»„è£…åŠ¨ç”»===========//
 
-	//Ó¢ĞÛ
-		//·ÉĞĞ¶¯»­
+	//è‹±é›„
+		//é£è¡ŒåŠ¨ç”»
 	auto aniHero1Fly = Animation :: create();
 	aniHero1Fly->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("hero1.png"));
 	aniHero1Fly->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("hero2.png"));
 	aniHero1Fly->setDelayPerUnit(0.2f);
 	aniHero1Fly->setLoops(-1);
-		//ÊÜÉË¶¯»­
+		//å—ä¼¤åŠ¨ç”»
 	auto aniHeroHit = Animation :: create();
 	aniHeroHit->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("hero_blowup_n1.png"));
 	aniHeroHit->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("hero1.png"));
 	aniHeroHit->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("hero2.png"));	
 	aniHeroHit->setDelayPerUnit(0.2f);
-		//»÷»Ù¶¯»­
+		//å‡»æ¯åŠ¨ç”»
 	auto aniHeroDown = Animation :: create();
 	for(int i = 0;i < 4;i++)
 	{
@@ -72,8 +72,8 @@ bool Apathy_WelcomeScene :: init()
 	}
 	aniHeroDown->setDelayPerUnit(0.2f);
 
-	//µĞ»ú
-		//Ğ¡µĞ»ú»÷»Ù¶¯»­
+	//æ•Œæœº
+		//å°æ•Œæœºå‡»æ¯åŠ¨ç”»
 	auto aniSmallEnemyDown = Animation::create();
 	for(int i = 0;i < 4;i++)
 	{
@@ -81,12 +81,12 @@ bool Apathy_WelcomeScene :: init()
 		aniSmallEnemyDown->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName(framename));
 	}
 	aniSmallEnemyDown->setDelayPerUnit(0.1f);
-		//ÖĞµĞ»úÊÜ»÷¶¯»­
+		//ä¸­æ•Œæœºå—å‡»åŠ¨ç”»
 	auto aniMiddleEnemyHit = Animation::create();
 	aniMiddleEnemyHit->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("enemy2_hit.png"));
 	aniMiddleEnemyHit->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("enemy2.png"));
 	aniMiddleEnemyHit->setDelayPerUnit(0.2f);
-		//ÖĞµĞ»ú»÷»Ù¶¯»­
+		//ä¸­æ•Œæœºå‡»æ¯åŠ¨ç”»
 	auto aniMiddleEnemyDown = Animation::create();
 	for(int i = 0;i < 4;i++)
 	{
@@ -94,17 +94,17 @@ bool Apathy_WelcomeScene :: init()
 		aniMiddleEnemyDown->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName(framename));
 	}
 	aniMiddleEnemyDown->setDelayPerUnit(0.2f);
-		//´óµĞ»ú·ÉĞĞ¶¯»­
+		//å¤§æ•Œæœºé£è¡ŒåŠ¨ç”»
 	auto aniBigEnemeyFly = Animation::create();
 	aniBigEnemeyFly->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("enemy3_n1.png"));
 	aniBigEnemeyFly->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("enemy3_n2.png"));
 	aniBigEnemeyFly->setDelayPerUnit(0.2f);
 	aniBigEnemeyFly->setLoops(-1);
-		//´óµĞ»úÊÜ»÷¶¯»­
+		//å¤§æ•Œæœºå—å‡»åŠ¨ç”»
 	auto aniBigEnemyHit = Animation::create();
 	aniBigEnemyHit->addSpriteFrame(SpriteFrameCache::getInstance()->getSpriteFrameByName("enemy3_hit.png"));
 	aniBigEnemyHit->setDelayPerUnit(0.2f);
-		//´óµĞ»ú»÷»Ù¶¯»­
+		//å¤§æ•Œæœºå‡»æ¯åŠ¨ç”»
 	auto aniBigEnemyDown = Animation::create();
 	for(int i = 0;i < 6;i++)
 	{
@@ -123,7 +123,7 @@ bool Apathy_WelcomeScene :: init()
 	aniLoading->setDelayPerUnit(0.2f);
 	aniLoading->setLoops(2);
 
-	//¶¯»­·ÅÈë»º´æ³Ø
+	//åŠ¨ç”»æ”¾å…¥ç¼“å­˜æ± 
 	AnimationCache::getInstance()->addAnimation(aniHero1Fly, "aniHero1Fly");
 	AnimationCache::getInstance()->addAnimation(aniHeroHit, "aniHeroHit");
 	AnimationCache::getInstance()->addAnimation(aniHeroDown, "aniHeroDown");
@@ -136,7 +136,7 @@ bool Apathy_WelcomeScene :: init()
 	AnimationCache::getInstance()->addAnimation(aniLoading, "aniLoading");
 
 	
-	//Ìø×ª½çÃæ(Loading½çÃæ)
+	//è·³è½¬ç•Œé¢(Loadingç•Œé¢)
 	auto Welcome_Bg1 = Sprite::createWithSpriteFrameName("background.png");
 	auto Welcome_Bg2 = Sprite::createWithSpriteFrameName("shoot_copyright.png");
 	Welcome_Bg1->setPosition(visibleSize.width / 2,visibleSize.height / 2);
@@ -150,7 +150,7 @@ bool Apathy_WelcomeScene :: init()
 	this->addChild(Loading,BackGround_Layer);
 	auto callFunc = CallFunc::create([]()
 	{
-		//Ìø×ª³¡¾°µÄ´úÂë
+		//è·³è½¬åœºæ™¯çš„ä»£ç 
 		auto scene = ApathyVV::CreateScene();
 		Director::getInstance()->replaceScene(scene);
 	});

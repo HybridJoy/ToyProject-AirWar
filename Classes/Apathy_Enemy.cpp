@@ -62,10 +62,10 @@ bool Apathy_Enemy :: Init(EnemyType type)
 				{
 					return false;
 				}
-				//´óÐÍµÐ»úµÄ·ÉÐÐ¶¯»­
+				//å¤§åž‹æ•Œæœºçš„é£žè¡ŒåŠ¨ç”»
 				auto aniBigEnemeyFly = AnimationCache::getInstance()->getAnimation("aniBigEnemeyFly");
 				this->runAction(Animate::create(aniBigEnemeyFly));
-				//²¥·ÅÒôÐ§
+				//æ’­æ”¾éŸ³æ•ˆ
 				Audio->playEffect("big_spaceship_flying.mp3",true);
 				this->M_Speed = 1;
 				this->M_HP = 10;
@@ -90,7 +90,7 @@ bool Apathy_Enemy :: Hit()
 	switch (this->Current_Type)
 	{
 		case SMALL_ENEMY:
-			return false;	//Ð¡µÐ»úÃ»ÓÐÊÜÉË¶¯»­£¬ÌáÇ°ÍË³ö
+			return false;	//å°æ•Œæœºæ²¡æœ‰å—ä¼¤åŠ¨ç”»ï¼Œæå‰é€€å‡º
 		case MIDDLE_ENEMY:
 			aniEnemyHit = AnimationCache::getInstance()->getAnimation("aniMiddleEnemyHit");
 			break;
@@ -131,12 +131,12 @@ void Apathy_Enemy :: Hit_Down()
 	
 	auto animate = Animate::create(aniEnemyDown);
 
-	//CallFuncÊÇ¶¯×÷£¬ÔÊÐíÎÒÃÇµÄ´úÂë×÷Îª¶¯×÷Ö´ÐÐ
-	//SequenceÊÇ¶¯×÷£¬×÷ÓÃÊÇ½«¶à¸ö¶¯×÷°´Ë³ÐòÒÀ´ÎÖ´ÐÐ
+	//CallFuncæ˜¯åŠ¨ä½œï¼Œå…è®¸æˆ‘ä»¬çš„ä»£ç ä½œä¸ºåŠ¨ä½œæ‰§è¡Œ
+	//Sequenceæ˜¯åŠ¨ä½œï¼Œä½œç”¨æ˜¯å°†å¤šä¸ªåŠ¨ä½œæŒ‰é¡ºåºä¾æ¬¡æ‰§è¡Œ
 	auto callFuncN = CallFuncN::create([](Node* node) 
 	{
-		//Node²ÎÊýÊÇÕâ¸ö¶¯×÷µÄÖ´ÐÐÕß
-		//½«×Ô¼º´Ó¸¸ÈÝÆ÷É¾³ý²¢Çå³ý(¶¨Ê±Æ÷£¬¶¯×÷)
+		//Nodeå‚æ•°æ˜¯è¿™ä¸ªåŠ¨ä½œçš„æ‰§è¡Œè€…
+		//å°†è‡ªå·±ä»Žçˆ¶å®¹å™¨åˆ é™¤å¹¶æ¸…é™¤(å®šæ—¶å™¨ï¼ŒåŠ¨ä½œ)
 		node->removeFromParentAndCleanup(true);
 	});
 
